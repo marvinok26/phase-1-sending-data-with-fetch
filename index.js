@@ -1,26 +1,30 @@
+// Add your code here
+
 function submitData(name, email) {
-
-    const configurationObject = {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-        },
-        body: JSON.stringify({
-            name: name,
-            email: email
-        }),
+    const url = 'http://localhost:3000/users'
+    const Data = {
+      name: name,
+      email: email,
     };
-
-    // Return the fetch() so that the tests can access it
-    return fetch("http://localhost:3000/users", configurationObject)
-        .then(response => response.json())
-        .then(data => {
-            console.log(data);
-            return data;
-        })
-        .catch(function (error) {
-            alert("Unauthorized Access");
-            console.log(error.message);
-        });
-}
+  
+    const configurationObject = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify(Data),
+    };
+  
+    return fetch(url, configurationObject)
+      .then((response) => response.json())
+      .then((data) => {
+        document.body.innerHTML += `<p>${data.id}</p>`;
+      })
+      .catch((error) => {
+        document.body.innerHTML += `<p>${error.message}</p>`;
+      });
+  }
+  
+  
+  submitData(name,email);
